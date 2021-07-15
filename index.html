@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="author" content="Donisius Wigie">
+	<title>🖩 Simplex Calculator</title>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@200&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div class="wrapper">
+		<div class="title-wrapper">
+			<h1>Kalkulator Simplex</h1>
+		</div>
+		<h4 class="instructions">
+			Masukkan masalah optimasi linier dan klik solve.
+			Cost function untuk memaksimalkan atau meminimalkan harus menggunakan kata "min" atau "max".
+			Batasan harus berupa pertidaksamaan atau persamaan (<=, >=, atau =).
+			Semua variabel harus berada di sisi kiri semua persamaan.
+			Semua persamaan harus berada pada garis yang terpisah.
+			Sebagai contoh:
+		</h4>
+		<div class="sample-LOs">
+			<h4 class="LO">
+				max 3x1 + x2 + 3x3
+				2x1 + 3x2 + 5x3 <= 64
+				x1 - x2 - x3 >= 0
+				x2 - x3 >= 2
+			</h4>
+			<h4>
+				atau
+			</h4>
+			<h4 class="LO">
+				min 12x1 + 16x2
+				x1 + 2x2 >= 40
+				x1 + x2 = 30
+				* >= 0
+			</h4>
+		</div>
+		<h4 class="instructions">
+			Anda juga dapat menggunakan operator * agar batasan diterapkan ke semua variabel. 
+			Sebagai contoh:
+		</h4>
+		<div class="sample-LOs">
+			<h4 class="LO">
+				min 5x1 - 20x2
+				-2x1 + 10x2 <= 5
+				2x1 + 5x2 <= 10
+				x1 + * >= 0
+			</h4>
+			<h4>
+				akan menjadi
+			</h4>
+			<h4 class="LO">
+				min 5x1 - 20x2
+				-2x1 + 10x2 <= 5
+				2x1 + 5x2 <= 10
+				x1 + x1 >= 0
+				x1 + x2 >= 0
+			</h4>
+		</div>
+		<textarea id="input" rows="10", cols="100">
+max 3x1 + 2x2
+2x1 + x2 <= 18
+2x1 + 3x2 <= 42
+3x1 + x2 <= 24
+* >= 0
+		</textarea>
+		<div class="invalid-text"></div>
+		<label class="checkbox-wrapper">
+			<input id="show-tables-checkbox" type="checkbox" checked="true">
+			<span class="checkmark"></span>
+			Dengan tabel
+		</label>
+		<div class="button-wrapper">
+			<button onclick="runSimplex()" class="solve-button">Percahkan!</button>
+			<button onclick="clearResults()" class="clear-button">Hapus hasil sebelumnya</button>
+		</div>
+
+		<div class="results-wrapper">
+			<h2 id="results"></h4>
+		</div>
+		<div id="legend">
+			<h3 style="text-align: center; margin-bottom: 2rem;">
+				Yang ditampilkan di bawah ini adalah setiap tableau yang digunakan untuk menghitung hasilnya.
+			</h4>
+			<div class="legend-items">
+				<div class="legend-item">
+					<div class="color-sample" style="background: #f1c21b;"></div>
+					<h4 class="legend-text">
+						Cost function
+					</h4>
+				</div>
+				<div class="legend-item">
+					<div class="color-sample" style="background: #fa4d56;"></div>
+					<h4 class="legend-text">
+						Elemen pivot
+					</h4>
+				</div>
+				<div class="legend-item">
+					<div class="color-sample" style="background: #42be65;"></div>
+					<h4 class="legend-text">
+						Original cost function di fase awal
+					</h4>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tableau-wrapper">
+		<div id="tableau-anchor"></div>
+	</div>
+	<script src="src/utils.js" type="module"></script>
+	<script src="src/dom-utils.js" type="module"></script>
+	<script src="src/simplex.js" type="module"></script>
+	<script src="src/parser.js" type="module"></script>
+	<script src="src/index.js" type="module"></script>
+</body>
+</html>
