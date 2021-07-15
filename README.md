@@ -1,6 +1,6 @@
 # simplex-calculator
 
-https://donisius.github.io/simplex-calculator/
+Made with all my heart, by Fajri. (Semoga gaji dinaikan)
 
 ### Prerequisites
 
